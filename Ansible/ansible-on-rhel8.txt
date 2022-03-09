@@ -1,0 +1,4 @@
+dnf install ansible
+To enable the Ansible Engine repository for RHEL 8, run the following command:
+
+subscription-manager repos --enable ansible-2.9-for-rhel-8-x86_64-rpms
