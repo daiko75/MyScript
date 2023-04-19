@@ -1,0 +1,41 @@
+- name: Install Docker on RHEL 8
+  gather_facts: No
+  hosts: NOV-K8s-MASTER01
+  tasks:
+    - name: Uninstall old versions
+      yum:
+         name: 
+          - docker 
+          - docker-client
+          - docker-client-latest
+          - docker-common
+          - docker-latest
+          - docker-latest-logrotate
+          - docker-logrotate
+          - docker-engine
+          - podman
+          - runc
+         state: removed
+    - name: Install dependency
+      yum:
+         name:
+          - yum-utils
+         state: present
+         update_cache: true
+    - name: Install using the repository
+      command: 
+         yum-config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+    - name: Install Docker Engine
+      yum:
+        name:
+         - docker-ce
+         - docker-ce-cli
+         - docker-ce-cli
+         - docker-ce-cli
+         - docker-compose-plugin
+    - name: Start Docker
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
